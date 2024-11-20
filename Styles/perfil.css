@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    font-family: Atkinson Hyperlegible;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E1E7E1;
+}
+
+.todo {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2%;
+}
+
+.parte-izda {
+    width: 25%;
+    padding: 10px;
+    text-align: center;
+
+    .img-perfil {
+        width: 33%;
+        height: auto;
+        margin: 20px auto -30px auto;
+        border-radius: 25px;
+    }
+
+    .rating {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -20px;
+    }
+
+    .rating img {
+        width: 50px;
+        margin: 0 5px;
+    }
+}
+
+.parte-central {
+    width: 33%;
+
+    .span-izquierda {
+        border-left: 2px solid rgba(0, 0, 0, 0.5);
+        height: 76%;
+        display: inline-block;
+        margin-left: -70px;
+        opacity: 13%;
+        position: absolute;
+        top: -25%;
+        transform: translateY(50%);
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 28px; /* Increased font size */
+    }
+
+    hr {
+        display: none;
+    }
+
+    .datos {
+        align-items: center;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: -10px;
+    }
+
+    .datos p {
+        color: #0A8754;
+        font-weight: bold;
+        margin-right: 10px;
+        font-size: 18px; /* Increased font size */
+    }
+
+    .datos input {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        flex: 1;
+        max-width: 150px;
+        font-size: 18px; /* Increased font size */
+    }
+
+    .datos input[type="number"] {
+        max-width: 100px;
+    }
+
+    .datos input[type="date"] {
+        max-width: 200px;
+    }
+
+    .datos input[type="file"] {
+        max-width: 300px;
+    }
+
+    .datos input[type="email"] {
+        max-width: 280px;
+    }
+
+    .datos-email {
+        align-items: center;
+        width: 100%;
+        display: flex;
+        /*flex-wrap:wrap*/
+     
+        p {
+            color: #0A8754;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px; /* Increased font size */
+        }
+    }
+
+    .btn-editar {
+        align-items: center;
+        width: 90%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .btn-cancelar-guardar {
+        align-items: center;
+        width: 90%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .editar-perfil,
+    .guardar-cambios,
+    .cancelar-cambios {
+        background-color: #04344B;
+        border-radius: 5px;
+        color: white;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        border: none;
+        cursor: pointer;
+    }
+
+    .cancelar-cambios {
+        background-color: #b90000;
+    }
+}
+
+.parte-dcha {
+    width: 40%;
+    justify-content: center;
+
+    .span-derecha {
+        border-left: 2px solid rgba(0, 0, 0, 0.5);
+        height: 76%;
+        display: inline-block;
+        opacity: 13%;
+        position: absolute;
+        top: 13%;
+        margin-left: -15px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 28px; /* Increased font size */
+    }
+
+    .añadir-coche {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        color: #0A8754;
+        cursor: pointer;
+        font-size: 18px; /* Increased font size */
+    }
+
+    .datos-vehiculo {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        margin-bottom: -17px;
+    }
+
+    .datos-vehiculo p {
+        color: #0A8754;
+        font-weight: bold;
+        margin-right: 10px;
+        font-size: 18px; /* Increased font size */
+    }
+
+    .datos-vehiculo input {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        flex: 1;
+        max-width: 150px;
+        font-size: 18px; /* Increased font size */
+    }
+
+    .datos-vehiculo input[type="number"] {
+        max-width: 100px;
+    }
+
+    .datos-vehiculo input[type="date"] {
+        max-width: 200px;
+    }
+
+    .aceptar-cancelar {
+        float: right;
+        margin-top: -60px;
+    }
+
+    .boton-aceptar-cancelar {
+        width: 80px;
+        height: 50px;
+        cursor: pointer;
+        font-size: 18px; /* Increased font size */
+    }
+
+    .coche-añadido p {
+        color: black;
+        font-weight: bold;
+        margin-right: 10px;
+        font-size: 18px; /* Increased font size */
+    }
+
+    .span-coche {
+        border-left: 2px solid rgba(0, 0, 0, 0.5);
+        height: 76%;
+        margin-left: -30px;
+        opacity: 13%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.añadir-coche-inputs{
+    display:none;
+}
+
+/* Responsive solo para móviles */
+@media (max-width: 1210px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 20px;
+    }
+
+    .rating img {
+        width: 40px;
+    }
+
+    .datos,
+    .datos-email,
+    .añadir-coche {
+        justify-content: center;
+    }
+
+    .form-añadir-coche {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #inputs-coche {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .parte-izda,
+    .parte-central,
+    .parte-dcha {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    hr {
+        display: fixed;
+    }
+
+    .coche-añadido p {
+        font-size: 26px; /* Increased font size */
+    }
+
+    .btn-cancelar-guardar {
+        justify-content: center;
+    }
+
+    .span-coche {
+        display: none;
+    }
+
+    .hr-responsive {
+        display: block;
+    }
+}
+
+@media (min-width: 1800px) {
+    body {
+        zoom: 1.2; /* Adjust the zoom level as needed */
+    }
+}

@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E1E7E1;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.main-content {
+    margin-top: 20px;
+}
+
+.viajes-conductor {
+    margin-bottom: 30px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.button-group button {
+    margin: 0 10px;
+    background-color: #04344B;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+
+.button-group button:hover {
+    background-color: #0056b3;
+}
+
+h2 {
+    padding-bottom: 10px;
+}
+
+.viaje {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.viaje-info-izquierda,
+.viaje-info-derecha,
+.viaje-info-central {
+    flex: 1;
+    padding: 10px;
+}
+
+button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff1a1a;
+}
+
+span.material-symbols-outlined {
+    vertical-align: middle;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.viaje-info-central p,
+.viaje-info-izquierda p,
+.viaje-info-derecha p {
+    margin: 5px 0;
+}
+
+.estado-cancelado {
+    color: red; /* Rojo para cancelado */
+}
+
+.estado-confirmado {
+    color: green; /* Verde para confirmado */
+}
+
+.estado-pendiente {
+    color: rgb(227, 218, 91); /* Amarillo para pendiente */
+}
+
+.estado-terminado {
+    color: gray; /* Gris para terminado */
+    text-decoration: line-through;
+}
+
+.hidden {
+    display: none;
+}
+

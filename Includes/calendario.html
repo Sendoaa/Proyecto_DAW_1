@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasiera Data - Amaiera Data Egutegia</title>
+    <link rel="Shortcut icon" href="img/mopa.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="calendar-container">
+        <h2>Hautatu hasiera-data eta amaiera-data</h2>
+        <div class="calendar-header">
+            <button id="prevMonth">&lt;</button>
+            <span id="monthYear"></span>
+            <button id="nextMonth">&gt;</button>
+        </div>
+        <div id="calendar"></div>
+        <button id="confirmBtn">Datak Berretsi</button>
+        <button id="editBtn" style="display: none;">Datak Editatu</button>
+    </div>
+
+</body>
+
+<script>
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+    let today = new Date().getDate();
+    let startDate = null;
+    let endDate = null;
+    let datesConfirmed = false;
+
+    const calendar = document.getElementById('calendar');
+    const monthYear = document.getElementById('monthYear');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const editBtn = document.getElementById('editBtn');
+
+    // Generar calendario para el mes y año actuales
+    function generateCalendar(month, year) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDayOfMonth = (new Date(year, month, 1).getDay() + 6) % 7; // Ajustar para que lunes sea el primer día
+
+        // Mostrar mes y año en el encabezado
+        const monthNames = ["Urtarrila", "Otsaila", "Martxoa", "Apirila", "Maiatza", "Ekaina", "Uztaila", "Abuztua", "Iraila", "Urria", "Azaroa", "Abendua"];
+        monthYear.textContent = `${monthNames[month]} ${year}`;
+
+        // Generar el calendario en HTML
+        let html = '<table>';
+        html += '<tr><th>Ast</th><th>Ast</th><th>Ast</th><th>Ost</th><th>Ost</th><th>Lar</th><th>Iga</th></tr>';
+        html += '<tr>';
+
+        // Celdas vacías antes del primer día del mes
+        for (let i = 0; i < firstDayOfMonth; i++) {
+            html += '<td></td>';
+        }
+
+        // Añadir los días del mes
+        for (let day = 1; day <= daysInMonth; day++) {
+            if ((day + firstDayOfMonth - 1) % 7 === 0) {
+                html += '</tr><tr>';
+            }
+            html += `<td data-day="${day}" data-month="${month + 1}" data-year="${year}">${day}</td>`;
+        }
+
+        html += '</tr></table>';
+        calendar.innerHTML = html;
+
+        // Añadir evento de selección de fechas
+        const days = document.querySelectorAll('td[data-day]');
+        days.forEach(day => {
+            day.addEventListener('click', function () {
+                if (!datesConfirmed) {
+                    const selectedDay = {
+                        day: parseInt(this.getAttribute('data-day')),
+                        month: parseInt(this.getAttribute('data-month')),
+                        year: parseInt(this.getAttribute('data-year')),
+                    };
+
+                    if (!startDate || (startDate && endDate)) {
+                        // Si no hay fecha de inicio o ambas fechas ya están seleccionadas, seleccionar nueva fecha de inicio
+                        startDate = selectedDay;
+                        endDate = null;
+                        clearSelections();
+                        this.classList.add('selected');
+                    } else if (compareDates(selectedDay, startDate) > 0) {
+                        // Si ya hay fecha de inicio y la nueva fecha es mayor, establecer fecha de fin
+                        endDate = selectedDay;
+                        highlightRange(startDate, endDate);
+                    } else {
+                        // Si la nueva fecha es anterior, cambiar la fecha de inicio
+                        startDate = selectedDay;
+                        endDate = null;
+                        clearSelections();
+                        this.classList.add('selected');
+                    }
+                }
+            });
+        });
+
+        // Seleccionar el día de hoy si es el mes actual
+        if (month === new Date().getMonth() && year === new Date().getFullYear()) {
+            days.forEach(day => {
+                if (parseInt(day.getAttribute('data-day')) === today) {
+                    day.classList.add('selected');
+                    startDate = {
+                        day: today,
+                        month: currentMonth + 1,
+                        year: currentYear,
+                    };
+                }
+            });
+        }
+    }
+
+    // Limpiar las selecciones previas
+    function clearSelections() {
+        const days = document.querySelectorAll('td[data-day]');
+        days.forEach(day => day.classList.remove('selected', 'range'));
+    }
+
+    // Resaltar el rango seleccionado
+    function highlightRange(start, end) {
+        const days = document.querySelectorAll('td[data-day]');
+        days.forEach(day => {
+            const dayNumber = {
+                day: parseInt(day.getAttribute('data-day')),
+                month: parseInt(day.getAttribute('data-month')),
+                year: parseInt(day.getAttribute('data-year')),
+            };
+
+            if (compareDates(dayNumber, start) >= 0 && compareDates(dayNumber, end) <= 0) {
+                if (compareDates(dayNumber, start) === 0 || compareDates(dayNumber, end) === 0) {
+                    day.classList.add('selected');
+                } else {
+                    day.classList.add('range');
+                }
+            }
+        });
+    }
+
+    // Comparar dos fechas (retorna -1, 0 o 1)
+    function compareDates(date1, date2) {
+        const d1 = new Date(date1.year, date1.month - 1, date1.day);
+        const d2 = new Date(date2.year, date2.month - 1, date2.day);
+        return d1 - d2;
+    }
+
+    // Cambiar al mes anterior
+    document.getElementById('prevMonth').addEventListener('click', function () {
+        currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+        currentYear = (currentMonth === 11) ? currentYear - 1 : currentYear;
+        generateCalendar(currentMonth, currentYear);
+    });
+
+    // Cambiar al mes siguiente
+    document.getElementById('nextMonth').addEventListener('click', function () {
+        currentMonth = (currentMonth === 11) ? 0 : currentMonth + 1;
+        currentYear = (currentMonth === 0) ? currentYear + 1 : currentYear;
+        generateCalendar(currentMonth, currentYear);
+    });
+
+    // Confirmar las fechas seleccionadas
+    confirmBtn.addEventListener('click', function () {
+        // Cambiar el color de las fechas seleccionadas
+        function changeSelectedDateColor() {
+            const selectedDays = document.querySelectorAll('.selected, .range');
+            selectedDays.forEach(day => {
+                day.style.backgroundColor = '#008e5a'; // Cambia el color de fondo
+                day.style.opacity = '0.5'; // Cambia la opacidad
+                day.style.color = '#ffffff'; // Cambia el color del texto
+            });
+        }
+
+        // Llamar a la función para cambiar el color de las fechas seleccionadas
+        changeSelectedDateColor();
+
+        if (startDate && endDate) {
+            let FechaInicio = startDate.year + "-" + startDate.month + "-" + startDate.day;
+            let FechaFin = endDate.year + "-" + endDate.month + "-" + endDate.day;
+            console.log("Fecha Inicio: ", FechaInicio);
+            console.log("Fecha Fin: ", FechaFin);
+
+            document.getElementById('FechaInicio').value = FechaInicio;  // Asignarla al campo oculto
+            console.log(document.getElementById('FechaInicio').value);
+
+            document.getElementById('FechaFin').value = FechaFin;  // Asignarla al campo oculto
+            console.log(document.getElementById('FechaFin').value);
+            //sendPostRequest(FechaInicio, FechaFin);
+        } else if (startDate) {
+            let FechaInicio = startDate.year + "-" + startDate.month + "-" + startDate.day;
+            let FechaFin = startDate.day + "-" + startDate.month + "-" + startDate.year;
+            console.log("Fecha Inicio: ", FechaInicio);
+            console.log("Fecha Fin: ", FechaInicio);
+
+
+            ///////////////////////////////////BORRAR?///////////////////////////////////
+            /*document.getElementById('confirmBtn').addEventListener('change', function () {
+            //let fechaInicioSeleccionada = fechaInicioconst;  // Obtener la fecha seleccionada
+            document.getElementById('FechaInicio').value = FechaInicio;  // Asignarla al campo oculto
+            console.log("123");
+
+            //let fechaFinSeleccionada = FechaFin.value;  // Obtener la fecha seleccionada
+            document.getElementById('FechaFin').value = FechaFin;  // Asignarla al campo oculto
+            console.log("123");
+        })/*/
+
+
+            //sendPostRequest(FechaInicio, FechaFin);
+        } else {
+            alert('Hautatu hasiera-data eta amaiera-data.');
+        }
+
+        // Desactivar selección de fechas
+        datesConfirmed = true;
+
+        // Mostrar el botón de "Editar Fechas"
+        confirmBtn.style.display = 'none';
+        editBtn.style.display = 'block';
+    });
+
+    // Editar las fechas seleccionadas
+    editBtn.addEventListener('click', function () {
+        // Habilitar nuevamente la selección de fechas
+        datesConfirmed = false;
+
+        // Restaurar el color original de las fechas seleccionadas
+        const selectedDays = document.querySelectorAll('.selected, .range');
+        selectedDays.forEach(day => {
+            day.style.backgroundColor = '';
+            day.style.opacity = '1';
+            day.style.color = 'black'; // Cambia el color de vuelta
+        });
+
+        // Ocultar el botón de "Editar Fechas" y mostrar el de "Confirmar"
+        editBtn.style.display = 'none';
+        confirmBtn.style.display = 'block';
+    });
+
+    // Inicializar el calendario con el mes actual
+    generateCalendar(currentMonth, currentYear);
+
+    const fechaInicioconst = FechaInicio;
+    const fechaFinconst = FechaFin;
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('confirmBtn').addEventListener('click', function () {
+            //let fechaInicioSeleccionada = fechaInicioconst;  // Obtener la fecha seleccionada
+            document.getElementById('FechaInicio').value = FechaInicio;  // Asignarla al campo oculto
+            console.log(document.getElementById('FechaInicio').value);
+
+            //let fechaFinSeleccionada = FechaFin.value;  // Obtener la fecha seleccionada
+            document.getElementById('FechaFin').value = FechaFin;  // Asignarla al campo oculto
+            console.log(document.getElementById('FechaFin').value);
+        })
+    });
+</script>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .calendar-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #calendar {
+        width: 100%;
+    }
+
+    .calendar-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    #monthYear {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #04344b;
+    }
+
+    .calendar-header button {
+        margin: 0;
+        width: 2.1em;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+        background-color: #0A8754;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+
+    th {
+        background-color: #04344b;
+        border: 1px solid black;
+        color: white;
+    }
+
+    td {
+        transition: background-color 0.2s ease;
+        border: 1px solid black;
+    }
+
+    td:hover {
+        background-color: #a4a4a4;
+    }
+
+    td.selected {
+        background-color: #0A8754;
+        color: #fff;
+    }
+
+    td.range {
+        background-color: #0A8754;
+        color: #fff;
+    }
+
+    button {
+        background-color: #0A8754;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 1.1em;
+        width: 30%;
+        margin-left: 35%;
+        margin-right: 35%;
+        margin-top: 1em;
+    }
+
+    button:hover {
+        background-color: #04344b;
+    }
+
+    @media (max-width: 600px) {
+        .calendar-container {
+            padding: 10px;
+        }
+
+        th, td {
+            padding: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 8px;
+            font-size: 1em;
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .calendar-header button {
+            width: 1.5em;
+            font-size: 1rem;
+        }
+
+        #monthYear {
+            font-size: 1.2em;
+        }
+    }
+</style>
+
+</html>

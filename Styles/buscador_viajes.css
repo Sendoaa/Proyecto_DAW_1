@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: #E1E7E1;
+    font-family: Atkinson Hyperlegible;
+}
+
+.section_busq {
+    display: flex;
+    justify-content: center;
+}
+.clasesec{
+    justify-content: center;
+    display: flex;
+}
+#filtros {
+    position: sticky;
+    top: 0;
+    z-index: 100; 
+    text-align: center;
+    background-color: #C4C3C3;
+    color: #04344B;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px;
+    width: 30%;
+    height: 80%;
+    max-width: 232px;
+}
+
+#subirArriba {
+    position: fixed; 
+    bottom: 20px; 
+    right: 30px; 
+    padding: 10px; 
+    background-color: #04344B; 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    display: block; 
+}
+
+#subirArriba:hover {
+    background-color: #0056b3; 
+}
+
+#resultado {
+    background-color: #C4C3C3;
+    color: #04344B;
+    border-radius: 15px;
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 574px;
+    max-height: 100px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.fecha-viaje {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #0A8757;
+    font-weight: bold;
+}
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegura que esté superpuesto sobre todo */
+    flex-direction: column;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-left-color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+.checkmark {
+    font-size: 50px;
+    color: limegreen;
+    margin-top: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#loadingOverlay p {
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+}
+#horarios {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    font-size: 1.2em;
+}
+
+.horario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10%;
+    font-weight: bold;
+    position: relative;
+}
+
+.linea {
+    height: 2px;
+    background: #04344B;
+    width: 20%;
+    margin-top: 10px;
+}
+.precio-comprar{
+    margin-left: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+#informacion {
+    border-top: 1px solid #04344B;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.informacion-vehiculo{
+    flex-wrap: wrap;
+}
+#informacion div {
+    align-items: center;
+    display: flex;
+}
+.botonPerfil{
+    font-family: Atkinson Hyperlegible;
+    border: none; 
+    background: transparent;
+    padding: 0; 
+    font-size: 15px;
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    color: #04344B;
+}
+
+.icono {
+    margin-left: 8px;
+}
+
+.precio {
+    font-weight: bold;
+    color: #0A8757;
+}
+
+.cantidad-centimos {
+    font-size: 13px;
+    vertical-align: super;
+}
+
+h3, h4 {
+    margin: 0 0 10px 0;
+}
+
+.filtro-ordenar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#borrar-todo {
+    background-color: transparent;
+    color: #0D7AAE;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.filtro-opcion {
+    margin: 10px 0;
+}
+
+.filtro-opcion label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+.material-symbols-outlined {
+    margin-left: 8px;
+}
+
+.radio-grande {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    transform: scale(1.5);
+    margin-right: 10px;
+}
+.paginacion {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.paginacion a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #0a8757;
+    border-radius: 5px;
+}
+
+.paginacion a:hover {
+    background-color: #066945;
+}
+.oculto {
+    display: none;
+}
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.7); 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.modal-content {
+    background-color: #ffffff; 
+    border-radius: 10px; 
+    padding: 20px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+    text-align: center; 
+    max-width: 400px; 
+    width: 90%; 
+    margin: auto; 
+    position: relative; 
+}
+
+.close {
+    cursor: pointer; 
+    font-size: 1.5rem; 
+    position: absolute; 
+    top: 10px; 
+    right: 15px; 
+    color: #aaa; 
+}
+
+.close:hover {
+    color: #f00; 
+}
+
+.modal-buttons {
+    margin-top: 20px; 
+}
+
+.modal-buttons button {
+    padding: 10px 20px; 
+    margin: 0 5px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+#confirmButton {
+    background-color: #4CAF50; 
+    color: white; 
+}
+
+#confirmButton:hover {
+    background-color: #45a049; 
+}
+
+.modal-buttons button:last-child {
+    background-color: #f44336; 
+    color: white; 
+}
+
+.modal-buttons button:last-child:hover {
+    background-color: #e53935; 
+}
+
+.boton-estilo {
+    background-color: #0a8757;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn_filtros{
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .section_busq {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn_filtros{
+        display: block;
+    }
+    #filtros {
+        width: 100%;
+        display: none;
+        position:relative;
+    }
+
+    #resultado {
+        max-height: 150px;
+        padding: 30px;
+        max-width: 350px;
+    }
+
+    #horarios {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1.1em;
+        position: relative;
+    }
+
+    .horario {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .horario span {
+        margin-right: 10px;
+    }
+
+    .linea {
+        display: none;
+    }
+
+    .precio {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 1.0em;
+        margin-right: 10px;
+    }
+    
+    #informacion {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 449px) {
+    #resultado {
+        max-width: 280px;
+        max-height: 180px;
+    }
+}

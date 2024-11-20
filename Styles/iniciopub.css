@@ -1,0 +1,540 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #E1E7E1;
+}
+
+.banner-container {
+    width: 100%;
+    height: 300px;
+    /* Ajusta la altura según lo necesites */
+}
+
+.banner {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Asegura que la imagen cubra todo el div */
+}
+
+.nav {
+    width: 60%;
+    position: absolute;
+    left: 48.5%;
+    margin-top: 220px;
+    transform: translateX(-50%);
+    /* Centra el nav horizontalmente */
+    padding: 10px;
+    /* Espaciado alrededor del contenido del nav */
+    border-radius: 5px;
+    /* Esquinas redondeadas opcionales */
+}
+
+.Bienvenido {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+    margin-top: 5em;
+}
+
+.tarjetas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3em;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.traj1 {
+    width: 20%;
+    padding: 20px;
+    background-color: #c4c3c3;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.traj1 h3 {
+    margin-top: 0;
+}
+
+.tarjetas ul {
+    padding-left: 20px;
+}
+@media (max-width: 1480px) {
+    .nav{
+        margin-top: 190px;
+    }
+}
+@media (max-width: 1024px) {
+    .traj1 {
+        width: 25%;
+    }
+}
+
+@media (max-width: 768px) {
+    .traj1 {
+        width: 40%;
+    }
+}
+@media (max-width: 625px) {
+    .nav{
+        margin-top: 160px;
+    }
+    .Bienvenido{
+        margin-top: 250px;
+    }
+}
+@media (max-width: 480px) {
+    .traj1 {
+        width: 90%;
+    }
+}
+
+.boton_guardar_datos {
+    background-color: #0A8754;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 1em;
+}
+
+.boton_guardar_datos:hover {
+    background-color: #04344B;
+    color: white;
+}
+
+/*publicar viaje*/
+
+.estructura_publicar_viaje {
+    display: grid;
+    grid-template-columns: 21% 40% 29%;
+    gap: 5%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 51.5em
+}
+
+
+.cuando_viajas {
+    text-align: center;
+    padding-top: 1em;
+    font-weight: bold;
+    background-color: #c4c3c4;
+    color: #04344B;
+    margin-top: 2em;
+    border-radius: 25px;
+    padding-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cuando_viajas input {
+    height: 50px;
+    width: 150px;
+    font-size: 2em;
+    border-radius: 20px;
+    text-align: center;
+    color: #0A8754;
+    font-weight: bold;
+    background-color: #d9d9d9;
+    border: none;
+    margin-top: 0.5em;
+    
+}
+
+.tabcontent {
+    background-color: #d9d9d9;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+}
+
+.tab{
+    width: 100%;
+
+}
+
+.tab button.active {
+    background-color: #d9d9d9;
+  }
+  
+
+.tablinks{
+    background-color: #c4c3c4;
+    color: #04344B;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.1em;
+    text-align: center;
+    width: 44.5%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 1px solid #d9d9d9;
+}
+
+.tablinks:hover {
+    background-color: #ababab;
+}
+
+
+
+.pasajeros_precio {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pasajeros {
+    width: 46%;
+    background-color: #c4c3c4;
+    color: #04344B;
+    margin-top: 2em;
+    border-radius: 25px;
+    padding-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pasajeros h2 {
+    text-align: center;
+    margin: 0.5em;
+}
+
+.precio h2 {
+    text-align: center;
+    margin: 0.8em;
+}
+
+.precio {
+    width: 46%;
+    height: 11.3em;
+    background-color: #c4c3c4;
+    color: #04344B;
+    margin-top: 2em;
+    border-radius: 25px;
+    padding-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #00334E;
+    border-radius: 50%;
+    color: #00334E;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.number {
+    color: #008E5A;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.tipo_discapacidad {
+    background-color: #c4c3c4;
+    color: #04344B;
+    margin-top: 2em;
+    border-radius: 25px;
+    padding-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tipo_discapacidad h2 {
+    text-align: center;
+    padding-top: 1em;
+    margin: 1em;
+    margin-bottom: 1.5em;
+}
+
+.radio-grande {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.filtro-opcion {
+    width: 40%;
+    margin-bottom: 1.7em;
+}
+
+.filtro-opcion label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+.tipotexto {
+    width: 60%;
+    height: 1.7em;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    background-color: #d9d9d9;
+}
+
+.tambien_vuelves {
+    background-color: #c4c3c4;
+    color: #04344B;
+    margin-top: 2em;
+    border-radius: 25px;
+    padding-bottom: 2.7em;
+    height: auto;
+
+}
+
+.tambien_vuelves h2 {
+    text-align: center;
+    padding-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.tambien_vuelves h3 {
+    text-align: center;
+    display: none;
+    margin-bottom: 0.5em;
+}
+
+.tambien_vuelves_input {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    transform: scale(1.2);
+    margin-left: 45%;
+    margin-bottom: 1.5em;
+}
+
+.si_vuelve_none {
+    height: 50px;
+    width: 150px;
+    font-size: 2em;
+    margin-left: 32%;
+    margin-right: 32%;
+    border-radius: 20px;
+    text-align: center;
+    color: #0A8754;
+    font-weight: bold;
+    background-color: #d9d9d9;
+    border: none;
+    display: none;
+}
+
+
+
+
+@media (max-width: 1200px) {
+    .estructura_publicar_viaje {
+        display: grid;
+        grid-template-columns: 35% 61%;
+        gap: 4%;
+        width: 94%;
+        margin-left: 3%;
+        margin-right: 3%;
+        height: auto;
+    }
+
+    .salida span {
+        transform: scale(1);
+    }
+
+    .salida {
+        height: 18em;
+    }
+
+    .salida h2 {
+        font-size: 1.3em;
+    }
+
+    .salida div {
+        width: 84%;
+        margin-left: 7%;
+        margin-right: 7%;
+        
+    }
+
+    .salida input {
+        font-size: 0.63em;
+    }
+
+
+    .ruta h2 {
+        font-size: 1.3em;
+    }
+
+    .ruta a {
+        font-size: 0.9em;
+        color: #04344B;
+    }
+
+    .cuando_viajas {
+        text-align: center;
+        padding-top: 1em;
+        font-weight: bold;
+
+        background-color: #c4c3c4;
+        color: #04344B;
+        margin-top: 2em;
+        border-radius: 25px;
+        padding-bottom: 1em;
+    }
+
+    .cuando_viajas h2 {
+        font-size: 1.3em;
+    }
+
+    .cuando_viajas input {
+        height: 40px;
+        width: 120px;
+        font-size: 1.5em;
+        border-radius: 15px;
+    }
+
+    .pasajeros {
+        width: 50%;
+    }
+
+    .pasajeros {
+        width: 50%;
+    }
+
+    .pasajeros h2 {
+        font-size: 1.3em;
+        margin: 0.8em;
+    }
+
+    .precio h2 {
+        font-size: 1.3em;
+    }
+
+    .icon-container {
+        gap: 10px;
+    }
+
+    .number {
+        font-size: 2.5em;
+    }
+
+    .columna3 {
+        grid-column: span 2;
+        display: flex;
+        gap: 4%;
+        width: 100%;
+        height: 25em;
+    }
+
+    .tipo_discapacidad {
+        height: 18em;
+        width: 50%;
+        margin-top: 0em;
+    }
+
+    .tipo_discapacidad h2 {
+        font-size: 1.3em;
+        margin-bottom: 1em;
+    }
+
+    .tambien_vuelves h2 {
+        font-size: 1.3em;
+        margin-top: 1em;
+    }
+
+    .tambien_vuelves {
+        height: 16.2em;
+        width: 50%;
+        margin-top: 0em;
+    }
+}
+
+@media (max-width: 750px) {
+    #calendar{
+        width: 90%;
+    }
+}
+
+
+
+@media (max-width: 550px) {
+    .estructura_publicar_viaje {
+        display: flex;
+        flex-direction: column;
+        gap: 1%;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+
+    .pasajeros h2 {
+        font-size: 1.2em;
+        margin: 0.5em;
+    }
+
+    .precio h2 {
+        font-size: 1.2em;
+    }
+
+    .icon-container {
+        gap: 10px;
+    }
+
+    .number {
+        font-size: 2.2em;
+    }
+
+    .columna3 {
+        grid-column: span 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1%;
+        height: 60%;
+    }
+
+    .tipo_discapacidad {
+        margin-top: 0.5em;
+        height: 25em;
+        width: 100%;
+    }
+
+    .tambien_vuelves {
+        height: 20em;
+        width: 100%;
+        margin-top: 0.5em;
+        margin-bottom: 10px;
+    }
+}

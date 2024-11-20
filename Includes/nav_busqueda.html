@@ -1,0 +1,174 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+<style>
+  #controls {
+    display: flex;
+    background-color: #0a8757;
+    padding: 20px;
+    border-radius: 15px;
+    width: 95%;
+    max-width: 890px;
+    margin: 20px;
+    margin-left: 3em;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: Atkinson;
+  }
+
+  #pasajeros option {
+    background-color: #0a8757;
+    color: white;
+  }
+
+  #controls input,
+  #controls select {
+    flex: 1;
+    color: white;
+    margin: 5px;
+    padding: 8px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+  }
+
+  #controls input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .material-icon {
+    color: white;
+    font-size: 25px;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: transform 0.5s;
+  }
+
+  .origen-destino,
+  .fecha-pasajeros {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .rotate {
+    transform: rotate(180deg);
+  }
+
+  #controls button {
+    background-color: #04344b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    flex-shrink: 0;
+  }
+  .fecha-clase {
+    color: white;
+    background-color: white;
+  }
+  input {
+    color-scheme: white;
+  }
+  .iconos_nav{
+    font-size: 25px;
+  }
+  @media (max-width: 1478px) {
+    #controls {
+      flex-direction: column;
+    }
+    .origen-destino,
+    .fecha-pasajeros {
+      width: 100%;
+    }
+
+    #controls input,
+    #controls select {
+      margin: 10px 0;
+      width: 100%;
+    }
+
+    .material-icon {
+      margin-right: 10px;
+    }
+  }
+
+  @media (max-width: 625px) {
+    .origen-destino,
+    .fecha-pasajeros {
+      flex-direction: column;
+    }
+
+    #controls button {
+      width: 100%;
+    }
+    #controls{
+      width: 70%;
+    }
+
+    #icon_ocul {
+      display: none;
+    }
+
+    #controls {
+      display: flex;
+      background-color: #0a8757;
+      border-radius: 15px;
+      width: 100%;
+      margin-left: -20px;
+    }
+  }
+</style>
+<form action="buscador_viajes.php" method="POST">
+  <div id="controls">
+    <div class="origen-destino">
+      <span class="material-symbols-outlined material-icon iconos_nav" id="icon_ocul">radio_button_unchecked</span>
+      <input id="origen" name="origen" type="text" placeholder="Jatorria" 
+             value="<?php echo isset($_SESSION['origen']) ? htmlspecialchars($_SESSION['origen']) : ''; ?>" />
+      <span class="material-symbols-outlined material-icon iconos_nav" id="intercambiar">cached</span>
+      <span class="material-symbols-outlined material-icon iconos_nav" id="icon_ocul">radio_button_unchecked</span>
+      <input id="destino" name="destino" type="text" placeholder="Helmuga" 
+             value="<?php echo isset($_SESSION['destino']) ? htmlspecialchars($_SESSION['destino']) : ''; ?>" />
+    </div>
+
+    <div class="fecha-pasajeros">
+      <input id="fecha" name="fecha" type="date" class="fecha-clase" 
+         value="<?php echo isset($_SESSION['fecha']) ? htmlspecialchars($_SESSION['fecha']) : date('Y-m-d'); ?>" />
+      <span class="material-symbols-outlined material-icon" id="icon_ocul">people</span>
+      <select id="pasajeros" name="pasajeros">
+        <option value="1" <?php if (isset($_SESSION['pasajeros']) && $_SESSION['pasajeros'] == 1) echo 'selected'; ?>>1 Bidaiari</option>
+        <option value="2" <?php if (isset($_SESSION['pasajeros']) && $_SESSION['pasajeros'] == 2) echo 'selected'; ?>>2 Bidaiari</option>
+        <option value="3" <?php if (isset($_SESSION['pasajeros']) && $_SESSION['pasajeros'] == 3) echo 'selected'; ?>>3 Bidaiari</option>
+        <option value="4" <?php if (isset($_SESSION['pasajeros']) && $_SESSION['pasajeros'] == 4) echo 'selected'; ?>>4 Bidaiari</option>
+        <option value="5" <?php if (isset($_SESSION['pasajeros']) && $_SESSION['pasajeros'] == 5) echo 'selected'; ?>>5 Bidaiari</option>
+      </select>
+      <button id="buscar" type="submit">Bilatu</button>
+      <span class="material-symbols-outlined material-icon iconos_nav" id="clear_fields">clear</span>
+    </div>
+  </div>
+</form>
+<script>
+  document.getElementById("intercambiar").onclick = () => {
+    const origen = document.getElementById("origen");
+    const destino = document.getElementById("destino");
+    [origen.value, destino.value] = [destino.value, origen.value];
+    const iconoIntercambiar = document.getElementById("intercambiar");
+    iconoIntercambiar.classList.add("rotate");
+    setTimeout(() => iconoIntercambiar.classList.remove("rotate"), 500);
+  };
+
+  document.getElementById("clear_fields").onclick = () => {
+    document.getElementById("origen").value = "";
+    document.getElementById("destino").value = "";
+  };
+
+  function setTodayDate() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+
+    const formattedDate = `${yyyy}-${mm}-${dd}`;
+    document.getElementById("fecha").value = formattedDate;
+  }
+</script>

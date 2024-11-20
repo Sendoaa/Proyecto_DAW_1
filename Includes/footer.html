@@ -1,0 +1,102 @@
+<style>
+    .footer {
+        background-color: #073a4d;
+        color: #ffffff;
+        position: relative;
+        text-align: center;
+        padding: 20px 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .footer-content p {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        letter-spacing: 1px;
+        color: #9dc4c8;
+    }
+
+    .footer-icons {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .footer-icons a {
+        text-decoration: none;
+        color: white;
+        font-size: 24px;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-icons a:hover {
+        transform: scale(1.2);
+        color: #0A8754;
+    }
+
+    .footer-icons a span {
+        vertical-align: middle;
+    }
+
+    .footer .link-footer {
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #0a8757;
+        color: #073a4d;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .footer .link-footer:hover {
+        background-color: #073a4d;
+        color: #0a8757;
+    }
+    /* Responsive for small screens */
+    @media (max-width: 600px) {
+        .footer-content p {
+            font-size: 14px;
+        }
+
+        .footer-icons a {
+            font-size: 20px;
+        }
+    }
+</style>
+
+<footer class="footer">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <div class="footer-content">
+        <p>MOPA © 2023 - Eskubide guztiak erreserbatuta</p>
+        <p>Kontaktua: <a href="mailto:mopa@gmail.com" class="link-footer">mopa@gmail.com</a></p>
+        <p>Cookie Politika: <a href="politica_cookies.php" class="link-footer">Cookieak</a></p>
+
+        <div class="footer-icons">
+            <a href="#" onclick="copyToClipboard()"><span class="material-symbols-outlined">share</span></a>
+            <a href="https://www.youtube.com/embed/gJbVw3_Y_0s?si=eHErZgRFSpm7iscF?autoplay=1" target="_blank"><span class="material-symbols-outlined">youtube_activity</span></a>
+            <a href="https://www.facebook.com/soyunamopa/?locale=es_ES" target="_blank"><span class="material-symbols-outlined">thumb_up</span></a>
+        </div>
+
+        <script>
+            function copyToClipboard() {
+                const dummy = document.createElement('textarea');
+                dummy.value = window.location.href;
+                document.body.appendChild(dummy);
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+                alert('Esteka kopiatu da');
+            }
+        </script>
+    </div>
+</footer>
